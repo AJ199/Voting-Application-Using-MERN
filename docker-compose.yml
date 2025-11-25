@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: voting_mongo
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: voting_app
+    ports:
+      - "27017:27017"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: server
+    container_name: voting_api
+    restart: unless-stopped
+    env_file:
+      - server/.env.example
+      - .env.example
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    volumes:
+      # in dev you might want to mount code for hot reload, but production shouldn't
+      - ./:/usr/src/app:cached
+
+volumes:
+  mongo-data:
