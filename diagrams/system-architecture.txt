@@ -1,0 +1,38 @@
+=================================
+      SYSTEM ARCHITECTURE
+=================================
+
+          [ React Client ]
+                  |
+                  v
+       -----------------------
+       |  Express API Layer  |
+       -----------------------
+        |    |      |   |
+        |    |      |   +--> Authentication (JWT)
+        |    |      |
+        |    |      +------> Vote Management
+        |    |
+        |    +-------------> Election CRUD
+        |
+        +------------------> MongoDB (Data Layer)
+
+
+-----------------------------------------
+Flow (Voting example):
+-----------------------------------------
+1. User logs in → receives JWT  
+2. Client stores JWT → sends with every request  
+3. User opens an election → GET /elections/:id  
+4. User submits vote → POST /elections/:id/vote  
+5. Server validates → records vote in MongoDB  
+6. Client updates UI with results  
+
+-----------------------------------------
+System Components:
+-----------------------------------------
+Frontend: React + Vite  
+Backend: Node.js + Express  
+Database: MongoDB  
+Auth: JWT  
+Deployment: Docker, GitHub Actions  
