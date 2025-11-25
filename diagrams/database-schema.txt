@@ -1,0 +1,55 @@
+===============================
+     DATABASE SCHEMA DESIGN
+===============================
+
+Collections: `users`, `elections`, `votes`
+
+-----------------------------------
+USERS COLLECTION
+-----------------------------------
+User {
+  _id: ObjectId,
+  name: String,
+  email: String (unique),
+  passwordHash: String,
+  role: "user" | "admin",
+  createdAt: Date,
+  updatedAt: Date
+}
+
+-----------------------------------
+ELECTIONS COLLECTION
+-----------------------------------
+Election {
+  _id: ObjectId,
+  title: String,
+  description: String,
+  candidates: [ String ],
+  startDate: Date,
+  endDate: Date,
+  createdBy: ObjectId (Admin),
+  createdAt: Date,
+  updatedAt: Date
+}
+
+-----------------------------------
+VOTES COLLECTION
+-----------------------------------
+Vote {
+  _id: ObjectId,
+  electionId: ObjectId,
+  userId: ObjectId,
+  candidate: String,
+  createdAt: Date
+}
+
+Constraint:
+- userId + electionId must be UNIQUE (a user votes only once)
+
+-----------------------------------
+RELATIONSHIPS
+-----------------------------------
+User (1) ---- (N) Election  
+User (1) ---- (N) Vote  
+Election (1) ---- (N) Vote
+
