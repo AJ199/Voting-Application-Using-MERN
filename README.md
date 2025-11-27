@@ -1,6 +1,6 @@
 # Voting Application — MERN
 
-A secure voting / election management application built with the MERN stack (MongoDB, Express, React (Vite), Node). This repo contains a backend API and a React frontend. The repository includes Docker support so you can build and run the entire stack with a single command.
+A secure voting / election management full-stack application built with the MERN stack (MongoDB, Express, React (Vite), Node). This repo contains a backend API and a React frontend. The repository includes Docker support so you can build and run the entire stack with a single command.
 
 ---
 
